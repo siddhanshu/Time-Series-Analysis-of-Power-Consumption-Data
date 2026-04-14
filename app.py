@@ -101,7 +101,7 @@ st.pyplot(fig)
 st.markdown("Weekly mean resampling smooths out daily fluctuations, making trends clearer.")
 
 st.subheader('Monthly Sums of Electricity Data')
-opsd_monthly = opsd_daily[data_columns].resample('M').sum(min_count=28)
+opsd_monthly = opsd_daily[data_columns].resample('ME').sum(min_count=28)
 st.dataframe(opsd_monthly.head())
 
 fig, ax = plt.subplots(figsize=(12, 6))
@@ -116,7 +116,7 @@ st.markdown("Monthly view shows clear yearly seasonality and the steady growth o
 
 # --- Annual Share of Wind+Solar ---
 st.header('5. Wind + Solar Share of Annual Electricity Consumption')
-opsd_annual = opsd_daily[data_columns].resample('A').sum(min_count=360)
+opsd_annual = opsd_daily[data_columns].resample('YE').sum(min_count=360)
 opsd_annual = opsd_annual.set_index(opsd_annual.index.year)
 opsd_annual.index.name = 'Year'
 opsd_annual['Wind+Solar/Consumption'] = opsd_annual['Wind+Solar'] / opsd_annual['Consumption']
